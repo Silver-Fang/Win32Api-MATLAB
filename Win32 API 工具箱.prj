@@ -1,0 +1,168 @@
+<deployment-project plugin="plugin.toolbox" plugin-version="1.0">
+  <configuration file="D:\OneDrive - 翁悸会\MATLAB\Win32API\Win32 API 工具箱.prj" location="D:\OneDrive - 翁悸会\MATLAB\Win32API" name="Win32 API 工具箱" target="target.toolbox" target-name="打包为工具箱">
+    <param.appname>Win32 API</param.appname>
+    <param.authnamewatermark>埃博拉酱</param.authnamewatermark>
+    <param.email>vhtmfu@outlook.com</param.email>
+    <param.company />
+    <param.summary>为MATLAB环境提供方便的Win32 API调用接口</param.summary>
+    <param.description>本包中所有函数均在命名空间+Win32API下，使用前需import。使用命名空间是一个好习惯，可以有效防止命名冲突，避免编码时不必要的代码提示干扰。
+```MATLAB
+import Win32API.*
+```
+[CloseHandle](#CloseHandle) 关闭一个打开的对象句柄。
+
+[+FileAPI](#FileAPI)
+- [CreateFile](#CreateFile) 创建或打开文件或 I/O 设备。
+- [ReadFile](#ReadFile) 从指定的文件或输入/输出 (I/O) 设备读取数据。如果设备支持，读取发生在文件指针指定的位置。
+- [SetEndOfFile](#SetEndOfFile) 将指定文件的物理文件大小设置为文件指针的当前位置。
+- [SetFilePointer](#SetFilePointer) 移动指定文件的文件指针。
+- [WriteFile](#WriteFile) 将数据写入指定的文件或输入/输出 (I/O) 设备。
+
+[+ShellAPI](#ShellAPI)
+- [SHFileOperation](#SHFileOperation) 复制、移动、重命名或删除文件系统对象。</param.description>
+    <param.screenshot>${PROJECT_ROOT}\工具箱图标.png</param.screenshot>
+    <param.version>1.0.0</param.version>
+    <param.output>${PROJECT_ROOT}\Win32 API.mltbx</param.output>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.guid>87ec000a-2945-4953-a73c-57eba7771c3c</param.guid>
+    <param.exclude.filters>% List files contained in your toolbox folder that you would like to exclude
+% from packaging.  Excludes should be listed relative to the toolbox folder.
+% Some examples of how to specify excludes are provided below:
+%
+% A single file in the toolbox folder:
+% .svn
+%
+% A single file in a subfolder of the toolbox folder:
+% example/.svn
+%
+% All files in a subfolder of the toolbox folder:
+% example/*
+%
+% All files of a certain name in all subfolders of the toolbox folder:
+% **/.svn
+%
+% All files matching a pattern in all subfolders of the toolbox folder:
+% **/*.bak
+%
+.git
+.vs
+API测试
+bin
+iCloseHandle
+iCreateFileW
+iReadFile
+iSetEndOfFile
+iSetFilePointerEx
+iSHFileOperationW
+iWriteFile
+resources/project
+.gitattributes
+.gitignore
+APITest.mlx
+x64
+test.txt
+Win32 API.sln</param.exclude.filters>
+    <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
+    <param.examples />
+    <param.demosxml />
+    <param.apps />
+    <param.registered.apps />
+    <param.docs />
+    <param.getting.started.guide />
+    <param.matlabpath.excludes />
+    <param.javaclasspath.excludes />
+    <param.exported.on.package>false</param.exported.on.package>
+    <param.required.addons />
+    <param.matlab.project.id />
+    <param.matlab.project.name />
+    <param.release.start />
+    <param.release.end />
+    <param.release.current.only>false</param.release.current.only>
+    <param.compatiblity.windows>true</param.compatiblity.windows>
+    <param.compatiblity.macos>false</param.compatiblity.macos>
+    <param.compatiblity.linux>false</param.compatiblity.linux>
+    <param.compatiblity.matlabonline>false</param.compatiblity.matlabonline>
+    <param.installation.map />
+    <param.additional.sw.names />
+    <param.additional.sw.licenses />
+    <param.additional.sw.win.url />
+    <param.additional.sw.mac.url />
+    <param.additional.sw.linux.url />
+    <unset>
+      <param.company />
+      <param.output />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.exclude.pcodedmfiles />
+      <param.examples />
+      <param.demosxml />
+      <param.apps />
+      <param.registered.apps />
+      <param.docs />
+      <param.getting.started.guide />
+      <param.matlabpath.excludes />
+      <param.javaclasspath.excludes />
+      <param.exported.on.package />
+      <param.required.addons />
+      <param.matlab.project.id />
+      <param.matlab.project.name />
+      <param.release.start />
+      <param.release.end />
+      <param.release.current.only />
+      <param.compatiblity.windows />
+      <param.installation.map />
+      <param.additional.sw.names />
+      <param.additional.sw.licenses />
+      <param.additional.sw.win.url />
+      <param.additional.sw.mac.url />
+      <param.additional.sw.linux.url />
+    </unset>
+    <fileset.rootdir>
+      <file>${PROJECT_ROOT}</file>
+    </fileset.rootdir>
+    <fileset.rootfiles>
+      <file>${PROJECT_ROOT}\+Win32API</file>
+      <file>${PROJECT_ROOT}\README.md</file>
+      <file>${PROJECT_ROOT}\resources</file>
+      <file>${PROJECT_ROOT}\工具箱图标.png</file>
+    </fileset.rootfiles>
+    <fileset.depfun.included />
+    <fileset.depfun.excluded />
+    <fileset.package />
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}" name="Win32 API.mltbx" optional="false">D:\OneDrive - 翁悸会\MATLAB\Win32API\Win32 API.mltbx</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2021b</root>
+      <toolboxes>
+        <toolbox name="neuralnetwork" />
+      </toolboxes>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

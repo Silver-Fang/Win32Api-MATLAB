@@ -1,0 +1,433 @@
+{
+    "Win32API.CloseHandle": {
+        "inputs": [
+            {
+                "name": "Object",
+                "kind": "required",
+                "type": [
+                    "Win32API.WinNT.HANDLE",
+                    "vector"
+                ],
+                "purpose": "打开对象的有效句柄"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "Succeed",
+                "type": [
+                    "logical",
+                    "column"
+                ]
+            },
+            {
+                "name": "ErrorCode",
+                "type": [
+                    "Win32API.SystemErrorCodes",
+                    "column"
+                ]
+            }
+        ]
+    },
+    "Win32API.FileAPI.CreateFile": {
+        "inputs": [
+            {
+                "name": "FileName",
+                "kind": "required",
+                "type": [
+                    [
+                        "string",
+                        "vector"
+                    ],
+                    [
+                        "char",
+                        "vector"
+                    ],
+                    [
+                        "cell",
+                        "vector"
+                    ],
+                    [
+                        "file"
+                    ]
+                ],
+                "purpose": "要创建或打开的文件或设备的名称"
+            },
+            {
+                "name": "DesiredAccess",
+                "kind": "ordered",
+                "type": [
+                    "Win32API.Internal.CombinableFlagU32",
+                    "scalar"
+                ],
+                "purpose": "请求的对文件或设备的访问",
+                "default": "Win32API.WinNT.GenericAccessRights.GENERIC_READ|Win32API.WinNT.GenericAccessRights.GENERIC_WRITE"
+            },
+            {
+                "name": "ShareMode",
+                "kind": "ordered",
+                "type": [
+                    "Win32API.Internal.CombinableFlagU32",
+                    "scalar"
+                ],
+                "purpose": "请求的文件或设备的共享模式",
+                "default": "Win32API.WinNT.FileShareMode.FILE_SHARE_READ"
+            },
+            {
+                "name": "SecurityAttributes",
+                "kind": "ordered",
+                "type": [
+                    "uint64",
+                    "scalar"
+                ],
+                "purpose": "暂不支持设置特殊的安全属性，必须为0",
+                "default": 0
+            },
+            {
+                "name": "CreationDisposition",
+                "kind": "ordered",
+                "type": [
+                    "Win32API.WinNT.CreationDisposition",
+                    "scalar"
+                ],
+                "purpose": "对存在或不存在的文件或设备采取的操作",
+                "default": "Win32API.WinNT.CreationDisposition.OPEN_ALWAYS"
+            },
+            {
+                "name": "FlagsAndAttributes",
+                "kind": "ordered",
+                "type": [
+                    "Win32API.Internal.CombinableFlagU32",
+                    "scalar"
+                ],
+                "purpose": "文件或设备属性和标志",
+                "default": "Win32API.WinNT.FlagsAndAttributes.FILE_ATTRIBUTE_NORMAL"
+            },
+            {
+                "name": "TemplateFile",
+                "kind": "ordered",
+                "type": [
+                    "Win32API.WinNT.HANDLE",
+                    "scalar"
+                ],
+                "purpose": "具有 GENERIC_READ 访问权限的模板文件的有效句柄。",
+                "default": "Win32API.WinNT.HANDLE"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "Handles",
+                "type": [
+                    "Win32API.WinNT.HANDLE",
+                    "column"
+                ]
+            },
+            {
+                "name": "ErrorCodes",
+                "type": [
+                    "Win32API.SystemErrorCodes",
+                    "column"
+                ]
+            }
+        ]
+    },
+    "Win32API.FileAPI.ReadFile": {
+        "inputs": [
+            {
+                "name": "File",
+                "kind": "required",
+                "type": [
+                    "Win32API.WinNT.HANDLE",
+                    "scalar"
+                ],
+                "purpose": "设备句柄（例如，文件、文件流、物理磁盘、卷、控制台缓冲区、磁带驱动器、套接字、通信资源、邮槽或管道）"
+            },
+            {
+                "name": "NumberOfBytesToRead",
+                "kind": "required",
+                "type": [
+                    "real",
+                    "scalar"
+                ],
+                "purpose": "要读取的最大字节数。"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "Buffer",
+                "type": [
+                    "uint8",
+                    "column"
+                ]
+            },
+            {
+                "name": "Succeed",
+                "type": [
+                    "logical",
+                    "scalar"
+                ]
+            },
+            {
+                "name": "ErrorCode",
+                "type": [
+                    "Win32API.SystemErrorCodes",
+                    "scalar"
+                ]
+            }
+        ]
+    },
+    "Win32API.FileAPI.SetEndOfFile": {
+        "inputs": [
+            {
+                "name": "File",
+                "kind": "required",
+                "type": [
+                    "Win32API.WinNT.HANDLE",
+                    "vector"
+                ],
+                "purpose": "要扩展或截断的文件的句柄"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "Succeed",
+                "type": [
+                    "logical",
+                    "column"
+                ]
+            },
+            {
+                "name": "ErrorCode",
+                "type": [
+                    "Win32API.SystemErrorCodes",
+                    "column"
+                ]
+            }
+        ]
+    },
+    "Win32API.FileAPI.SetFilePointer": {
+        "inputs": [
+            {
+                "name": "File",
+                "kind": "required",
+                "type": [
+                    "Win32API.WinNT.HANDLE",
+                    "vector"
+                ],
+                "purpose": "文件的句柄"
+            },
+            {
+                "name": "DistanceToMove",
+                "kind": "ordered",
+                "type": [
+                    "scalar",
+                    "real"
+                ],
+                "purpose": "移动文件指针的字节数",
+                "default": 0
+            },
+            {
+                "name": "MoveMethod",
+                "kind": "ordered",
+                "type": [
+                    "Win32API.MoveMethod",
+                    "scalar"
+                ],
+                "purpose": "文件指针移动的起点。",
+                "default": "MoveMethod.FILE_CURRENT"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "NewFilePointer",
+                "type": [
+                    "int64",
+                    "column"
+                ]
+            },
+            {
+                "name": "Succeed",
+                "type": [
+                    "logical",
+                    "column"
+                ]
+            },
+            {
+                "name": "ErrorCode",
+                "type": [
+                    "Win32API.SystemErrorCodes",
+                    "column"
+                ]
+            }
+        ]
+    },
+    "Win32API.FileAPI.WriteFile": {
+        "inputs": [
+            {
+                "name": "File",
+                "kind": "required",
+                "type": [
+                    "Win32API.WinNT.HANDLE",
+                    "scalar"
+                ],
+                "purpose": "文件或 I/O 设备（例如，文件、文件流、物理磁盘、卷、控制台缓冲区、磁带驱动器、套接字、通信资源、邮槽或管道）的句柄"
+            },
+            {
+                "name": "Buffer",
+                "kind": "required",
+                "type": [
+                    "real",
+                    "vector"
+                ],
+                "purpose": "要写入文件或设备的数据"
+            },
+            {
+                "name": "NumberOfBytesToWrite",
+                "kind": "ordered",
+                "type": [
+                    "real",
+                    "scalar"
+                ],
+                "purpose": "要写入文件或设备的字节数"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "Succeed",
+                "type": [
+                    "logical",
+                    "scalar"
+                ]
+            },
+            {
+                "name": "NumberOfBytesWritten",
+                "type": [
+                    "real",
+                    "scalar"
+                ]
+            },
+            {
+                "name": "ErrorCode",
+                "type": [
+                    "Win32API.SystemErrorCodes",
+                    "scalar"
+                ]
+            }
+        ]
+    },
+    "Win32API.ShellAPI.SHFileOperation": {
+        "inputs": [
+            {
+                "name": "FileOp",
+                "kind": "ordered",
+                "type": [
+                    "struct",
+                    "scalar"
+                ],
+                "purpose": "可以以结构体字段的形式指定下述名称值参数"
+            },
+            {
+                "name": "hwnd",
+                "kind": "namevalue",
+                "type": [
+                    "Win32API.HWND",
+                    "scalar"
+                ],
+                "purpose": "对话框的窗口句柄",
+                "default": "Win32API.HWND"
+            },
+            {
+                "name": "Func",
+                "kind": "namevalue",
+                "type": [
+                    "Win32API.ShellAPI.ShellFileOperations",
+                    "scalar"
+                ],
+                "purpose": "一个值，指示要执行的操作"
+            },
+            {
+                "name": "From",
+                "kind": "namevalue",
+                "type": [
+                    [
+                        "string",
+                        "vector"
+                    ],
+                    [
+                        "char",
+                        "vector"
+                    ],
+                    [
+                        "cell",
+                        "vector"
+                    ],
+                    [
+                        "file"
+                    ]
+                ],
+                "purpose": "一个或多个源文件名"
+            },
+            {
+                "name": "To",
+                "kind": "namevalue",
+                "type": [
+                    [
+                        "string",
+                        "vector"
+                    ],
+                    [
+                        "char",
+                        "vector"
+                    ],
+                    [
+                        "cell",
+                        "vector"
+                    ],
+                    [
+                        "file"
+                    ]
+                ],
+                "purpose": "目标文件或目录名称"
+            },
+            {
+                "name": "Flags",
+                "kind": "namevalue",
+                "type": [
+                    "Win32API.Internal.CombinableFlagU16",
+                    "scalar"
+                ],
+                "purpose": "控制文件操作的标志",
+                "default": "Win32API.ShellAPI.FILEOP_FLAGS.FOF_ALLOWUNDO"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "ErrorCode",
+                "type": [
+                    "Win32API.SystemErrorCodes",
+                    "scalar"
+                ]
+            },
+            {
+                "name": "AnyOperationsAborted",
+                "type": [
+                    "locigal",
+                    "scalar"
+                ]
+            },
+            {
+                "name": "SHNameMapping",
+                "type": [
+                    "struct",
+                    "column"
+                ]
+            },
+            {
+                "name": "ProgressTitle",
+                "type": [
+                    "char",
+                    "row"
+                ]
+            }
+        ]
+    }
+}
