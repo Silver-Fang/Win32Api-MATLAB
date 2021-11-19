@@ -66,7 +66,7 @@ ErrorCodes(:,1)SystemErrorCodes，创建每个文件产生的错误代码
 ## ReadFile
 从指定的文件或输入/输出 (I/O) 设备读取数据。如果设备支持，读取发生在文件指针指定的位置。
 
-不同于内置fread，本函数仅能读出uint8列向量。您可以使用typecast将读入数据转换为其它数据类型。
+不同于内置fread，本函数仅能读出uint8列向量。您可以使用typecast、native2unicode将读入数据转换为其它数据类型。
 ```MATLAB
 import Win32API.FileAPI.*
 %假设当前目录存在一个100字节的test.txt文件
@@ -115,10 +115,16 @@ ErrorCode(:,1)SystemErrorCodes，每个文件返回的错误代码
 
 您可以使用 SetFilePointer 来确定文件的长度。为此，请对 MoveMethod 使用 FILE_END 并寻找位置0。返回的文件偏移量是文件的长度。但是，这种做法可能会产生意想不到的副作用，例如无法保存当前文件指针以便程序可以返回到该位置。
 
-作为内置 ftell 函数的对标，您也可以使用 SetFilePointer 查询当前文件指针位置。为此，请指定 FILE_CURRENT 的移动方法和0距离。
+作为内置 ftell 函数的对标，您也可以使用 SetFilePointer 查询当前文件指针位置。
 ```MATLAB
 import Win32API.FileAPI.*
 import Win32API.MoveMethod
+%% 语法
+CurrentPosition=SetFilePointer(File) %返回当前文件指针位置
+CurrentPosition=SetFilePointer(File,DistanceToMove) %将文件指针设置到从文件开头起始的偏移
+CurrentPosition=SetFilePointer(File,DistanceToMove,MoveMethod) %以指定的位置为0点，移动文件指针
+[CurrentPosition,Succeed,ErrorCode]=SetFilePointer(___) %上述语法均可返回成功状态和错误代码
+%% 示例
 Handle=CreateFile('test.txt');
 CurrentPosition=SetFilePointer(Handle)
 %上述代码将返回文件指针当前位置
@@ -131,9 +137,9 @@ Win32API.CloseHandle(Handle);
 ### 输入参数
 File(:,1)WinNT.HANDLE，必需，文件的句柄。必须使用 GENERIC_READ 或 GENERIC_WRITE 访问权限创建文件句柄。该参数已向量化，可以同时操作多个文件。
 
-DistanceToMove(1,1)int64=int64(0)，可选，移动文件指针的字节数。正值将指针在文件中向前移动，负值将文件指针向后移动。
+DistanceToMove(1,1)int64，可选，移动文件指针的字节数。正值将指针在文件中向前移动，负值将文件指针向后移动。
 
-MoveMethod(1,1)MoveMethod=MoveMethod.FILE_CURRENT，可选，文件指针移动的起点。
+MoveMethod(1,1)MoveMethod，可选，文件指针移动的起点。
 ### 返回值
 NewFilePointer(:,1)int64，每个文件移动后的文件指针偏移。
 
@@ -157,7 +163,7 @@ Win32API.CloseHandle(Handle);
 ### 输入参数
 File(1,1)WinNT.HANDLE，必需，文件或 I/O 设备（例如，文件、文件流、物理磁盘、卷、控制台缓冲区、磁带驱动器、套接字、通信资源、邮槽或管道）的句柄。 必须是使用写访问权创建的。
 
-Buffer(:,1)uint8，必需，要写入文件或设备的数据。输入其它类型数值，将被强制转换为uint8类型，可能造成信息丢失。输入非ASCII字符也将被截断成单字节。调用方应当负责用typecast等方法将数据转换为原始字节数组再交给本函数。
+Buffer(:,1)uint8，必需，要写入文件或设备的数据。输入其它类型数值，将被强制转换为uint8类型，可能造成信息丢失。输入非ASCII字符也将被截断成单字节。调用方应当负责用typecast、unicode2native等方法将数据转换为原始字节数组再交给本函数。
 
 NumberOfBytesToWrite(1,1)uint32=uint32(numel(Buffer))，可选，要写入文件或设备的字节数。零值指定空写操作。空写操作的行为取决于底层文件系统或通信技术。
 ### 返回值
