@@ -21,7 +21,7 @@ import Win32API.*
 [+ShellAPI](#ShellAPI)
 - [SHFileOperation](#SHFileOperation) 复制、移动、重命名或删除文件系统对象。</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图标.png</param.screenshot>
-    <param.version>1.0.1</param.version>
+    <param.version>2.0.0</param.version>
     <param.output>${PROJECT_ROOT}\Win32 API.mltbx</param.output>
     <param.products.name />
     <param.products.id />
