@@ -76,7 +76,7 @@
                 "name": "SecurityAttributes",
                 "kind": "ordered",
                 "type": [
-                    "uint64",
+                    "real",
                     "scalar"
                 ],
                 "purpose": "暂不支持设置特殊的安全属性，必须为0",
